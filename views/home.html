@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        /* CSS styles go here */
+        body {
+            font-family: Cambria, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: row; /* Display menu and content side by side */
+            min-height: 100vh;
+        }
+
+        /* Left menu styles */
+        .menu {
+            width: 200px; /* Adjust the width as needed */
+            background-color: #333333;
+            color: #ffffff;
+            padding: 20px;
+        }
+
+        .menu a {
+            display: block;
+            color: #ffffff;
+            text-decoration: none;
+            margin-bottom: 10px;
+        }
+
+        .menu a:hover {
+            text-decoration: underline;
+        }
+
+        /* Content container styles */
+        .container {
+            flex: 1; /* Grow to fill the remaining space */
+            max-width: 600px;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        h1 {
+            color: #333333;
+        }
+
+        a.button {
+            display: block;
+            width: 150px;
+            max-width: 200%;
+            margin: 20px auto;
+            padding: 5px 10px;
+            text-align: center;
+            background-color: #007bff;
+            color: #ffffff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        a.button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Left menu -->
+    <div class="menu">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="/question-form">Ask me a question/send feedback</a></li>
+            <li><a href="/cv">My CV</a></li>
+            <li><a href="/certificates">My Certificates</a></li>
+            <li><a href="/ted-talks">Selected TED Talks</a></li> <!-- New menu entry -->
+        </ul>
+    </div>
+
+    <!-- Content container -->
+    <div class="container">
+        <h1>Welcome to Aghar's Website</h1>
+        <p>A wise man once said: People are put on this earth for a purpose. The ones who leave a trace of goodness, excellence , tolerance , ethical conduct and heritage in the form of an advice, a message , a book , a note , a piece of art, any sort of human friendly achievement and  humanly raised sons and daughters are those who deserve to be remembered. It is within our ability to be part of those and we should be. Bring harmony and resonance to your life and you will see/hear/feel that the whole universe with all its creatures are glorifying Allah with you in a pleasant scene worth living it wholly and to its far extent.</p>
+        <p> God bless him, he is my father </p>
+        <!-- Additional content goes here -->
+    </div>
+</body>
+</html>

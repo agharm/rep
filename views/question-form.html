@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--ensures that the content on the web page is scaled to fit the width of the device's screen. Initial-scale=1.0: This part sets the initial zoom level when the page is first loaded. A value of 1.0 means that the page is initially displayed at its original size-->
+    <title>Ask,</title> <!--URL title-->
+    <style>
+    /* CSS styles go here */
+    body {
+    font-family: Cambria, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    }
+
+    form {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 50px; /*whitespace box*/
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        user-select: none; /*to not select this at double click*/
+    }
+
+    .input-label {
+        vertical-align: super; /*spacing of label*/
+        user-select: text; /*to select this at double click*/
+    }
+
+    textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px; /*fillet*/
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    /* Style the email textarea */
+    textarea#email {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        resize: vertical;
+        min-height: 10px;
+    }
+
+    input[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    /* Center the form on the page */
+    html, body {
+        height: 100%;
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+  </style>
+</head>
+<body>
+    <form action="/submit" method="post">
+        <label for="email" class="input-label">E-mail</label>
+        <textarea name="email" id="email" required></textarea>
+        <label for="quest" class="input-label">Ask me a question:</label>
+        <textarea name="qtext" id="quest" rows="4" cols="50"></textarea><br> <!--name: server ref, id: css & script.js ref, br: for creating line breaks-->
+        <input type="submit" value="Done"> <!--type defines behavior & purpose-->
+    </form>
+<!--script src="script.js"></script-->
+</body>
+</html>
+
+<!--    
+<textarea id="question" name="question" required></textarea>
+
+<button type="submit">Submit</button> //is a more versatile element that can contain text, HTML, or other elements. You can include not only text but also images, icons, or even nested elements within a <button>. It allows for more flexibility in styling and customizing the appearance of the button using CSS. You can add event listeners to a <button> element directly to perform custom JavaScript actions when clicked.
+-->

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Website - Answer</title>
+  <style>
+    /* CSS styles go here */
+    body {
+        font-family: Cambria, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0 auto; /* centeing everything*/
+    }
+
+    .header {
+        text-align: center;
+        font-size: 12px; /* Adjust the font size as needed */
+        margin-bottom: 20px; /* Adjust the margin as needed */
+        margin: 0 auto;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 50px; /* Adjust the padding as needed */
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+    }
+
+    .input-label {
+        vertical-align: super; /* Spacing of label */
+    }
+
+    textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    /* Style the email textarea */
+    textarea#email {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        resize: vertical;
+        min-height: 10px;
+    }
+
+    #answerForm button[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+    #answerForm button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    /* Center the form on the page */
+    html, body {
+        height: 100%;
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column; /* Place the items vertically */
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Answer</h1>
+  </div>
+  <div class="container">
+    <p id="questionText"><%= qText %></p>
+    <form id="answerForm" action="/submitAnswer" method="post">
+      <textarea id="answer" name="answer" required></textarea>
+      <input type="hidden" name="questionId" value="<%= questionId %>">
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</body>
+</html>
