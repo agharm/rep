@@ -6,6 +6,7 @@
     "sqlite3": "^5.1.6",
     "uuid": "^9.0.1"
   },
+"postinstall": "npm run build",
 "scripts": {
   "start": "node new.js"
  }
