@@ -5,5 +5,8 @@
     "nodemailer": "^6.9.5",
     "sqlite3": "^5.1.6",
     "uuid": "^9.0.1"
-  }
+  },
+"scripts": {
+  "start": "node new.js"
+ }
 }
