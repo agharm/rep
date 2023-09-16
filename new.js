@@ -7,7 +7,7 @@ const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 
 const app = express();
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 3000
 
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
@@ -203,7 +203,7 @@ app.post('/submitAnswer', async (req, res) => {
   db.close();
 });
 
-app.listen(process.env.PORT || 5000)
+app.listen(process.env.PORT || 3000)
 
 //app.listen(port, '0.0.0.0', () => {
   //console.log(`Server is running on http://0.0.0.0:${PORT}`);
