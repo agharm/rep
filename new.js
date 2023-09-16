@@ -99,7 +99,8 @@ app.post('/submit', async (req, res) => {
 
   // Send email to admin with a link to the answer page
   const adminEmail = 'aghar_4@hotmail.com';
-  const answerLink = `http://localhost:3000/answer?id=${questionId}`;
+  //const answerLink = `http://localhost:3000/answer?id=${questionId}`;
+  const answerLink = `${req.protocol}://${req.get('host')}/answer?id=${questionId}`;
   const adminMailOptions = {
     from: config.gmail.user,
     to: adminEmail,
