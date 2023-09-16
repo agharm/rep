@@ -206,6 +206,10 @@ app.post('/submitAnswer', async (req, res) => {
 
 app.listen(process.env.PORT || 3000)
 
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+
 //app.listen(port, '0.0.0.0', () => {
   //console.log(`Server is running on http://0.0.0.0:${PORT}`);
 //});
