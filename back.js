@@ -5,9 +5,11 @@ const sqlite3 = require('sqlite3').verbose();
 const config = require('./config');
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
+const gmailUser = process.env.GMAIL_USER;
+const gmailPass = process.env.GMAIL_PASS;
 
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 3000
 
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
@@ -17,7 +19,7 @@ app.use(express.static('public'));
 
 // Serve the homepage
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/views/home.html');
+  res.sendFile(__dirname + '/views/hom.html');
 });
 
 // Serve the question form
@@ -30,9 +32,13 @@ app.get('/response', (req, res) => {
 });
 
 app.get('/ted-talks', (req, res) => {
-    res.sendFile(__dirname + '/views/ted.html');
+  res.sendFile(__dirname + '/views/ted.html');
+});
 
-// Serve the CV
+app.get('/projects', (req, res) => {
+  res.sendFile(__dirname + '/views/proj.html');
+});
+
 app.get('/cv', (req, res) => {
   const cvFilePath = __dirname + '/docs/CV.pdf'; // Replace 'your_cv.pdf' with the actual file name
 
@@ -44,6 +50,19 @@ app.get('/cv', (req, res) => {
 
   // Send the CV file
   res.sendFile(cvFilePath);
+});
+
+app.get('/word', (req, res) => {
+  const workFilePath = __dirname + '/docs/Work instructions.pdf'; // Replace 'your_cv.pdf' with the actual file name
+
+  // Set the content type to PDF
+  res.setHeader('Content-Type', 'application/pdf');
+
+  // Provide options for downloading the file with a specific name
+  res.setHeader('Content-Disposition', 'attachment; filename=Work instructions.pdf');
+
+  // Send the CV file
+  res.sendFile(workFilePath);
 });
 
 // Serve the Certificates page
@@ -99,7 +118,8 @@ app.post('/submit', async (req, res) => {
 
   // Send email to admin with a link to the answer page
   const adminEmail = 'aghar_4@hotmail.com';
-  const answerLink = `http://localhost:3000/answer?id=${questionId}`;
+  //const answerLink = `http://localhost:3000/answer?id=${questionId}`;
+  const answerLink = `${req.protocol}://${req.get('host')}/answer?id=${questionId}`;
   const adminMailOptions = {
     from: config.gmail.user,
     to: adminEmail,
@@ -203,6 +223,9 @@ app.post('/submitAnswer', async (req, res) => {
   db.close();
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+//app.listen(process.env.PORT || 3000)
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server is running on port ${PORT}`);
 });
+
