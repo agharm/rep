@@ -53,7 +53,7 @@ app.get('/cv', (req, res) => {
 });
 
 app.get('/word', (req, res) => {
-  const docxFilePath = __dirname + '/Work instructions.docx'; // Replace with the actual file path
+  const docxFilePath = __dirname + '/docs/Work instructions.docx'; // Replace with the actual file path
 
   // Set the content type to Word document
   res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
