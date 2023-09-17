@@ -19,7 +19,7 @@ app.use(express.static('public'));
 
 // Serve the homepage
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/views/home.html');
+  res.sendFile(__dirname + '/views/hom.html');
 });
 
 // Serve the question form
