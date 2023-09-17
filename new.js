@@ -53,18 +53,17 @@ app.get('/cv', (req, res) => {
 });
 
 app.get('/word', (req, res) => {
-  const docxFilePath = __dirname + '/docs/Work instructions.docx'; // Replace with the actual file path
+  const cvFilePath = __dirname + '/docs/Work instructions.pdf'; // Replace 'your_cv.pdf' with the actual file name
 
-  // Set the content type to Word document
-  res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+  // Set the content type to PDF
+  res.setHeader('Content-Type', 'application/pdf');
 
   // Provide options for downloading the file with a specific name
-  res.setHeader('Content-Disposition', 'attachment; filename=WorkInstructions.docx');
+  res.setHeader('Content-Disposition', 'attachment; filename=work inst.pdf');
 
-  // Send the Word document file
-  res.sendFile(docxFilePath);
+  // Send the CV file
+  res.sendFile(cvFilePath);
 });
-
 
 
 // Serve the Certificates page
