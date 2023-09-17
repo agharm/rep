@@ -189,9 +189,10 @@ app.post('/submitAnswer', async (req, res) => {
         } else {
           const userEmail = row ? row.dbemail : '';
           // Send email with the admin's answer to the user
+          const { qtext, email } = req.body;//remove
           const userMailOptions = {
             from: config.gmail.user,
-            to: email,
+            to: email, //userEmail
             subject: 'Your Question Answered',
             text: 'Answer from Aghar:\n\n' + answer,
           };
