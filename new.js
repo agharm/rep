@@ -53,18 +53,17 @@ app.get('/cv', (req, res) => {
 });
 
 app.get('/word', (req, res) => {
-  const cvFilePath = __dirname + '/docs/Work instructions.pdf'; // Replace 'your_cv.pdf' with the actual file name
+  const workFilePath = __dirname + '/docs/Work instructions.pdf'; // Replace 'your_cv.pdf' with the actual file name
 
   // Set the content type to PDF
   res.setHeader('Content-Type', 'application/pdf');
 
   // Provide options for downloading the file with a specific name
-  res.setHeader('Content-Disposition', 'attachment; filename=work inst.pdf');
+  res.setHeader('Content-Disposition', 'attachment; filename=Work instructions.pdf');
 
   // Send the CV file
   res.sendFile(cvFilePath);
 });
-
 
 // Serve the Certificates page
 app.get('/certificates', (req, res) => {
