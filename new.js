@@ -62,7 +62,7 @@ app.get('/word', (req, res) => {
   res.setHeader('Content-Disposition', 'attachment; filename=Work instructions.pdf');
 
   // Send the CV file
-  res.sendFile(cvFilePath);
+  res.sendFile(workFilePath);
 });
 
 // Serve the Certificates page
