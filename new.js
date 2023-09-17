@@ -35,6 +35,10 @@ app.get('/ted-talks', (req, res) => {
   res.sendFile(__dirname + '/views/ted.html');
 });
 
+app.get('/projects', (req, res) => {
+  res.sendFile(__dirname + '/proj.html');
+});
+
 app.get('/cv', (req, res) => {
   const cvFilePath = __dirname + '/docs/CV.pdf'; // Replace 'your_cv.pdf' with the actual file name
 
