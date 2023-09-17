@@ -93,27 +93,27 @@ app.get('/word', (req, res) => {
 
 // Handle form submission
 app.post('/submit', (req, res) => {
-  const { qtext, email } = req.body;
+  const { qtext, email, name } = req.body; // Extract the name from the form data
   const questionId = uuidv4();
 
   // Store the question in memory
-  questions.push({ questionId, email, qtext });
+  questions.push({ questionId, email, qtext, name }); // Include the name in the stored data
 
   // Send email to admin with a link to the answer page
   const adminEmail = 'aghar_4@hotmail.com';
   const answerLink = `${req.protocol}://${req.get('host')}/answer?id=${questionId}`;
   const adminMailOptions = {
-    from: process.env.GMAIL_USER, // Use the appropriate environment variable
+    from: process.env.GMAIL_USER,
     to: adminEmail,
     subject: email,
-    text: `A new question has been submitted: ${qtext}\nAnswer it here: ${answerLink}`,
+    text: `A new question has been submitted from ${name}: ${qtext}\nAnswer it here: ${answerLink}`, // Include the name in the email text
   };
 
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: process.env.GMAIL_USER, // Use the appropriate environment variable
-      pass: process.env.GMAIL_PASS, // Use the appropriate environment variable
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_PASS,
     },
     tls: {
       rejectUnauthorized: false,
