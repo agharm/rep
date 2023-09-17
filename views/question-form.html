@@ -38,15 +38,15 @@
         min-height: 100px;
     }
 
-    /* Style the email textarea */
-    textarea#email {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        resize: vertical;
-        min-height: 10px;
+    /* Apply styles to the common input fields */
+    input.common-input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      resize: vertical;
+      min-height: 10px;
     }
 
     input[type="submit"] {
@@ -76,14 +76,16 @@
 </head>
 <body>
     <form action="/submit" method="post">
-        <label for="name" class="input-label">Name:</label>
-        <input type="text" name="name" id="name" required>
-        <label for="email" class="input-label">E-mail:</label>
-        <textarea name="email" id="email" required></textarea>
-        <label for="quest" class="input-label">Ask me a question/send feedback on my website:</label>
-        <textarea name="qtext" id="quest" rows="4" cols="50"></textarea><br> <!--name: server ref, id: css & script.js ref, br: for creating line breaks-->
-        <input type="submit" value="Done"> <!--type defines behavior & purpose-->
+      <label for="name" class="input-label">Name:</label>
+      <input type="text" name="name" id="name" class="common-input" required><br>
+      <label for="email" class="input-label">E-mail:</label>
+      <input type="email" name="email" id="email" class="common-input" required><br>
+      <label for="quest" class="input-label">Ask me a question/ submit feedback:</label>
+      <textarea name="qtext" id="quest" rows="4" cols="50"></textarea><br>
+
+      <input type="submit" value="Done">
     </form>
+
 <!--script src="script.js"></script-->
 </body>
 </html>
