@@ -39,6 +39,19 @@ app.get('/projects', (req, res) => {
   res.sendFile(__dirname + '/views/proj.html');
 });
 
+app.get('/cv', (req, res) => {
+  const cvFilePath = __dirname + '/docs/CV.pdf'; // Replace 'your_cv.pdf' with the actual file name
+
+  // Set the content type to PDF
+  res.setHeader('Content-Type', 'application/pdf');
+
+  // Provide options for downloading the file with a specific name
+  res.setHeader('Content-Disposition', 'attachment; filename=CV-Aghar Masri-Engineer & Software Developer.pdf');
+
+  // Send the CV file
+  res.sendFile(cvFilePath);
+});
+
 app.get('/word', (req, res) => {
   const docxFilePath = __dirname + '/docs/Work instructions.docx'; // Replace with the actual file path
 
@@ -52,19 +65,6 @@ app.get('/word', (req, res) => {
   res.sendFile(docxFilePath);
 });
 
-
-app.get('/word', (req, res) => {
-  const docxFilePath = __dirname + '/docs/Work instructions.docx'; // Replace with the actual file path
-
-  // Set the content type to Word document
-  res.setHeader('Content-Type', 'application/octet-stream');
-
-  // Provide options for downloading the file with a specific name
-  res.setHeader('Content-Disposition', 'attachment; filename=WorkInstructions.docx');
-
-  // Send the Word document file
-  res.sendFile(docxFilePath);
-});
 
 
 // Serve the Certificates page
