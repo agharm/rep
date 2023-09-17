@@ -34,6 +34,33 @@ app.get('/ted-talks', (req, res) => {
   res.sendFile(__dirname + '/views/ted.html');
 });
 
+// Serve the Certificates page
+app.get('/certificates', (req, res) => {
+  // Set the path to your certificate.html file
+  const certificatesPagePath = path.join(__dirname, 'views', 'cert.html');
+
+  // Send the certificate.html file as a response
+  res.sendFile(certificatesPagePath);
+});
+
+// Create routes to serve individual certificates
+app.get('/certificates/:certificateName', (req, res) => {
+  // Get the certificate name from the URL parameters
+  const certificateName = req.params.certificateName;
+
+  // Set the path to the certificate file
+  const certificateFilePath = path.join(__dirname, 'docs', certificateName);
+
+  // Set the content type to PDF (or adjust to the appropriate content type)
+  res.setHeader('Content-Type', 'application/pdf');
+
+  // Provide options for downloading the file with a specific name
+  res.setHeader('Content-Disposition', `attachment; filename=${certificateName}`);
+
+  // Send the certificate file
+  res.sendFile(certificateFilePath);
+});
+
 app.get('/projects', (req, res) => {
   res.sendFile(__dirname + '/views/proj.html');
 });
