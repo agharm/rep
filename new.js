@@ -5,30 +5,15 @@ const sqlite3 = require('sqlite3').verbose();
 const config = require('./config');
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
-const gmailUser = process.env.GMAIL_USER;
-const gmailPass = process.env.GMAIL_PASS;
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-
-// Admin email (the only user who can access the answer page)
-const adminEmail = 'aghar_4@hotmail.com';
 
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
-
-// Middleware to check if the user is the admin
-const isAdmin = (req, res, next) => {
-  if (req.query.admin === 'true' && req.query.email === adminEmail) {
-    // Allow the admin to access the answer page
-    next();
-  } else {
-    res.status(403).send('Access Denied');
-  }
-};
 
 // Serve the homepage
 app.get('/', (req, res) => {
@@ -129,8 +114,8 @@ app.post('/submit', async (req, res) => {
   db.close();
 
   // Send email to admin with a link to the answer page
-  //const answerLink = `http://localhost:3000/answer?id=${questionId}`;
-  const answerLink = `${req.protocol}://${req.get('host')}/answer?id=${questionId}&admin=true&email=${adminEmail}`;
+  const adminEmail = 'aghar_4@hotmail.com';
+  const answerLink = `${req.protocol}://${req.get('host')}/answer?id=${questionId}`;
   const adminMailOptions = {
     from: config.gmail.user,
     to: adminEmail,
@@ -160,7 +145,7 @@ app.post('/submit', async (req, res) => {
 });
 
 // Handle rendering the answer page for admin and processing answer submission
-app.get('/answer', isAdmin, (req, res) => {
+app.get('/answer', (req, res) => {
   const questionId = req.query.id;
 
   // Open the database
