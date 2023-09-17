@@ -165,7 +165,7 @@ app.get('/answer', async (req, res) => {
     client.release();
   } catch (error) {
     console.error('Error retrieving question text:', error);
-    res.status(500).send('Error retrieving question text');
+    res.status(500).send('Error retrieving question text: ' + error.message); // Send the error message to the client
   }
 });
 
