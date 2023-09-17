@@ -52,6 +52,20 @@ app.get('/cv', (req, res) => {
   res.sendFile(cvFilePath);
 });
 
+app.get('/word', (req, res) => {
+  const docxFilePath = __dirname + '/Work instructions.docx'; // Replace with the actual file path
+
+  // Set the content type to Word document
+  res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+
+  // Provide options for downloading the file with a specific name
+  res.setHeader('Content-Disposition', 'attachment; filename=WorkInstructions.docx');
+
+  // Send the Word document file
+  res.sendFile(docxFilePath);
+});
+
+
 // Serve the Certificates page
 app.get('/certificates', (req, res) => {
   // Set the path to your certificate.html file
