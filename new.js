@@ -36,7 +36,7 @@ app.get('/ted-talks', (req, res) => {
 });
 
 app.get('/projects', (req, res) => {
-  res.sendFile(__dirname + '/proj.html');
+  res.sendFile(__dirname + '/views/proj.html');
 });
 
 app.get('/cv', (req, res) => {
