@@ -56,7 +56,7 @@ app.get('/word', (req, res) => {
   const docxFilePath = __dirname + '/docs/Work instructions.docx'; // Replace with the actual file path
 
   // Set the content type to Word document
-  res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+  res.setHeader('Content-Type', 'application/octet-stream');
 
   // Provide options for downloading the file with a specific name
   res.setHeader('Content-Disposition', 'attachment; filename=WorkInstructions.docx');
