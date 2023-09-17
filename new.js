@@ -5,6 +5,8 @@ const sqlite3 = require('sqlite3').verbose();
 const config = require('./config');
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
+const gmailUser = process.env.GMAIL_USER;
+const gmailPass = process.env.GMAIL_PASS;
 
 const app = express();
 const PORT = process.env.PORT || 3000
