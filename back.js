@@ -191,7 +191,7 @@ app.post('/submitAnswer', async (req, res) => {
           // Send email with the admin's answer to the user
           const userMailOptions = {
             from: config.gmail.user,
-            to: userEmail,
+            to: userEmail, //email
             subject: 'Your Question Answered',
             text: 'Answer from Aghar:\n\n' + answer,
           };
