@@ -16,12 +16,10 @@ app.use(express.static('public'));
 // Store submitted questions and answers in memory
 const questions = [];
 
-// Serve the homepage
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/hom.html');
 });
 
-// Serve the question form
 app.get('/question-form', (req, res) => {
   res.sendFile(__dirname + '/views/question-form.html');
 });
