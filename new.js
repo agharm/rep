@@ -17,7 +17,7 @@ app.use(express.static('public'));
 const questions = [];
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/views/hom.html');
+  res.sendFile(__dirname + '/views/home.html');
 });
 
 app.get('/question-form', (req, res) => {
