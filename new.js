@@ -103,8 +103,6 @@ app.post(
   '/submit',
   [
     check('email').isEmail().withMessage('Invalid email'),
-    check('qtext').isLength({ min: 10 }).withMessage('Question text must be at least 10 characters long'),
-    check('name').isLength({ min: 2 }).withMessage('Name must be at least 2 characters long'),
   ],
   (req, res, next) => {
     const errors = validationResult(req);
