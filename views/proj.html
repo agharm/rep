@@ -111,10 +111,7 @@
         // Add click event listeners to the menu items
         const menuItems = document.querySelectorAll('.menu a');
         menuItems.forEach(item => {
-            item.addEventListener('click', (event) => {
-                // Prevent the default link behavior
-                event.preventDefault();
-
+            item.addEventListener('mouseenter', () => {
                 // Get the title and content data attributes
                 const title = item.getAttribute('data-title');
                 const content = item.getAttribute('data-content');
