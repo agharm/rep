@@ -42,10 +42,11 @@
             display: block;
             color: black;
             text-decoration: none;
+            transition: color 0.3s ease; /* Add a transition for the color property */
         }
 
         .menu a:hover {
-            text-decoration: underline;
+            color: #007bff; /* Change text color on hover */
         }
 
         /* Content container styles */
@@ -89,34 +90,37 @@
     <div class="menu">
         <h2>Menu</h2>
         <ul>
-            <li><a href="https://agharweb-54fc277bc896.herokuapp.com/work">Work instructions, IEC 60335-1</a></li>
-            <li><a href="/class">AC Energy Efficiency Class Calc.</a></li>
-            <li><a href="/3">3</a></li>
+            <li><a href="https://agharweb-54fc277bc896.herokuapp.com/work" data-title="Work instructions, IEC 60335-1" data-content="Instructions for work according to IEC 60335-1.">Work instructions, IEC 60335-1</a></li>
+            <li><a href="/class" data-title="AC Energy Efficiency Class Calc." data-content="Calculate energy efficiency class for AC appliances.">AC Energy Efficiency Class Calc.</a></li>
+            <li><a href="/3" data-title="3" data-content="This is menu item 3.">3</a></li>
             <!-- New menu entry -->
         </ul>
     </div>
 
     <!-- Content container -->
     <div class="container">
-        <h1>Title:</h1>
-        <p><strong>Later...</strong></p>
+        <h1 id="title">Title:</h1>
+        <p id="content"><strong>Later...</strong></p>
     </div>
+
+    <script>
+        // Get references to the title and content elements
+        const titleElement = document.getElementById('title');
+        const contentElement = document.getElementById('content');
+
+        // Add click event listeners to the menu items
+        const menuItems = document.querySelectorAll('.menu a');
+        menuItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                // Get the title and content data attributes
+                const title = item.getAttribute('data-title');
+                const content = item.getAttribute('data-content');
+
+                // Update the title and content
+                titleElement.textContent = 'Title: ' + title;
+                contentElement.textContent = content;
+            });
+        });
+    </script>
 </body>
 </html>
-<!--
-background: linear-gradient(to bottom, #833ab4, #fd1d1d, #fcb045);
-background: linear-gradient(to bottom, #0DFF92, #00AA55);
-background: linear-gradient(to bottom, #FF6E7F, #BFE9FF);
-background: linear-gradient(to bottom, #FFD700, #FFAA00);
-background: linear-gradient(to bottom, #4F86F7, #3553E1);
-background: linear-gradient(to bottom, #FFD700, #FF6B6B);
-background: linear-gradient(to bottom, #11998E, #38EF7D);
-background: linear-gradient(to bottom, #2C3E50, #4CA1AF);
-background: linear-gradient(to bottom, #FF5722, #FFCA28);
-background: linear-gradient(to bottom, #EDEDED, #FFA500);
-background: linear-gradient(to bottom, #3498db, #9b59b6);
-background: linear-gradient(to bottom, #e74c3c, #f39c12);
-background: linear-gradient(to bottom, #2ecc71, #f1c40f);
-background: linear-gradient(to bottom, #e91e63, #9c27b0);
-background: linear-gradient(to bottom, #009688, #00bcd4);
--->
