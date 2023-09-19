@@ -166,6 +166,45 @@ app.get('/answer', (req, res) => {
   }
 });
 
+app.post('/submitAnswer', (req, res) => {
+  const { answer, questionId } = req.body;
+  const question = questions.find((q) => q.questionId === questionId);
+
+  if (!question) {
+    res.status(404).send('Question not found');
+    return;
+  }
+
+  // Send email with the admin's answer to the user
+  const userMailOptions = {
+    from: process.env.GMAIL_USER, // Use the appropriate environment variable
+    to: question.email,
+    subject: 'Your Question Answered',
+    text: 'Answer from Aghar:\n\n' + answer,
+  };
+
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.GMAIL_USER, // Use the appropriate environment variable
+      pass: process.env.GMAIL_PASS, // Use the appropriate environment variable
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+  });
+
+  transporter.sendMail(userMailOptions, (error, info) => {
+    if (error) {
+      console.error('Error sending email to user:', error);
+      res.status(500).send('Error sending email to user');
+    } else {
+      console.log('Email to user sent successfully', info.response);
+      res.send('Email sent successfully');
+    }
+  });
+});
+
 // Start the server
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running on port ${PORT}`);
