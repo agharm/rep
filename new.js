@@ -86,7 +86,7 @@ app.get('/cv', (req, res) => {
   res.sendFile(cvFilePath);
 });
 
-app.get('/word', (req, res) => {
+app.get('/work', (req, res) => {
   const workFilePath = __dirname + '/docs/Inst.pdf';
 
   // Set the content type to PDF
@@ -98,6 +98,20 @@ app.get('/word', (req, res) => {
   // Send the CV file
   res.sendFile(workFilePath);
 });
+
+app.get('/class', (req, res) => {
+  const excelFilePath = __dirname + '/docs/A+++.xlsx'; // Replace with the path to your Excel file
+
+  // Set the content type to Excel
+  res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); // MIME type for Excel files
+
+  // Provide options for downloading the file with a specific name
+  res.setHeader('Content-Disposition', 'attachment; filename=A+++.xlsx'); // Replace with the desired file name
+
+  // Send the Excel file
+  res.sendFile(excelFilePath);
+});
+
 
 // Handle form submission
 app.post(
