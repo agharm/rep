@@ -25,6 +25,7 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something went wrong!');
 });
 
+// Separate concerns into different modules or functions
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/home.html');
 });
@@ -103,6 +104,8 @@ app.post(
   '/submit',
   [
     check('email').isEmail().withMessage('Invalid email'),
+    check('qtext').isLength({ max: 300 }).withMessage('Question too long'),
+    check('name').isLength({ max: 15 }).withMessage('Name too long'),
   ],
   (req, res, next) => {
     const errors = validationResult(req);
@@ -118,34 +121,7 @@ app.post(
     questions.push({ questionId, email, qtext, name });
 
     // Send email to admin with a link to the answer page
-    const adminEmail = 'aghar_4@hotmail.com';
-    const answerLink = `${req.protocol}://${req.get('host')}/answer?id=${questionId}`;
-    const adminMailOptions = {
-      from: process.env.GMAIL_USER,
-      to: adminEmail,
-      subject: email,
-      text: `A new question has been submitted from ${name}: ${qtext}\nAnswer it here: ${answerLink}`,
-    };
-
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_PASS,
-      },
-      tls: {
-        rejectUnauthorized: false,
-      },
-    });
-
-    transporter.sendMail(adminMailOptions, (error, info) => {
-      if (error) {
-        console.error('Error sending email to admin:', error);
-        return next(error);
-      } else {
-        console.log('Email to admin sent successfully', info.response);
-      }
-    });
+    sendEmailToAdmin(email, name, qtext, questionId);
 
     res.redirect('/response');
   }
@@ -163,45 +139,40 @@ app.get('/answer', (req, res) => {
   }
 });
 
-app.post('/submitAnswer', (req, res) => {
-  const { answer, questionId } = req.body;
-  const question = questions.find((q) => q.questionId === questionId);
-
-  if (!question) {
-    res.status(404).send('Question not found');
-    return;
-  }
-
-  // Send email with the admin's answer to the user
-  const userMailOptions = {
-    from: process.env.GMAIL_USER, // Use the appropriate environment variable
-    to: question.email,
-    subject: 'Your Question Answered',
-    text: 'Answer from Aghar:\n\n' + answer,
+// Define your email sending function
+function sendEmailToAdmin(email, name, qtext, questionId) {
+  const adminEmail = 'aghar_4@hotmail.com';
+  const answerLink = `${req.protocol}://${req.get('host')}/answer?id=${questionId}`;
+  const adminMailOptions = {
+    from: process.env.GMAIL_USER,
+    to: adminEmail,
+    subject: email,
+    text: `A new question has been submitted from ${name}: ${qtext}\nAnswer it here: ${answerLink}`,
   };
 
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: process.env.GMAIL_USER, // Use the appropriate environment variable
-      pass: process.env.GMAIL_PASS, // Use the appropriate environment variable
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_PASS,
     },
     tls: {
       rejectUnauthorized: false,
     },
   });
 
-  transporter.sendMail(userMailOptions, (error, info) => {
+  transporter.sendMail(adminMailOptions, (error, info) => {
     if (error) {
-      console.error('Error sending email to user:', error);
-      res.status(500).send('Error sending email to user');
+      console.error('Error sending email to admin:', error);
+      // You can handle the error here
     } else {
-      console.log('Email to user sent successfully', info.response);
-      res.send('Email sent successfully');
+      console.log('Email to admin sent successfully', info.response);
+      // You can handle success here
     }
   });
-});
+}
 
+// Start the server
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running on port ${PORT}`);
 });
