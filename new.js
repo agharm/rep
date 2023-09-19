@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
+const { validationResult, check } = require('express-validator');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,6 +16,14 @@ app.use(express.static('public'));
 
 // Store submitted questions and answers in memory
 const questions = [];
+
+// Custom error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack); // Log the error to the console
+
+  // Send an error response to the client
+  res.status(500).send('Something went wrong!');
+});
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/home.html');
@@ -90,44 +99,57 @@ app.get('/word', (req, res) => {
 });
 
 // Handle form submission
-app.post('/submit', (req, res) => {
-  const { qtext, email, name } = req.body; // Extract the name from the form data
-  const questionId = uuidv4();
+app.post(
+  '/submit',
+  [
+    check('email').isEmail().withMessage('Invalid email'),
+  ],
+  (req, res, next) => {
+    const errors = validationResult(req);
 
-  // Store the question in memory
-  questions.push({ questionId, email, qtext, name }); // Include the name in the stored data
-
-  // Send email to admin with a link to the answer page
-  const adminEmail = 'aghar_4@hotmail.com';
-  const answerLink = `${req.protocol}://${req.get('host')}/answer?id=${questionId}`;
-  const adminMailOptions = {
-    from: process.env.GMAIL_USER,
-    to: adminEmail,
-    subject: email,
-    text: `A new question has been submitted from ${name}: ${qtext}\nAnswer it here: ${answerLink}`, // Include the name in the email text
-  };
-
-  const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.GMAIL_USER,
-      pass: process.env.GMAIL_PASS,
-    },
-    tls: {
-      rejectUnauthorized: false,
-    },
-  });
-
-  transporter.sendMail(adminMailOptions, (error, info) => {
-    if (error) {
-      console.error('Error sending email to admin:', error);
-    } else {
-      console.log('Email to admin sent successfully', info.response);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
     }
-  });
 
-  res.redirect('/response');
-});
+    const { qtext, email, name } = req.body;
+    const questionId = uuidv4();
+
+    // Store the question in memory
+    questions.push({ questionId, email, qtext, name });
+
+    // Send email to admin with a link to the answer page
+    const adminEmail = 'aghar_4@hotmail.com';
+    const answerLink = `${req.protocol}://${req.get('host')}/answer?id=${questionId}`;
+    const adminMailOptions = {
+      from: process.env.GMAIL_USER,
+      to: adminEmail,
+      subject: email,
+      text: `A new question has been submitted from ${name}: ${qtext}\nAnswer it here: ${answerLink}`,
+    };
+
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_PASS,
+      },
+      tls: {
+        rejectUnauthorized: false,
+      },
+    });
+
+    transporter.sendMail(adminMailOptions, (error, info) => {
+      if (error) {
+        console.error('Error sending email to admin:', error);
+        return next(error);
+      } else {
+        console.log('Email to admin sent successfully', info.response);
+      }
+    });
+
+    res.redirect('/response');
+  }
+);
 
 // Handle rendering the answer page for admin and processing answer submission
 app.get('/answer', (req, res) => {
@@ -182,4 +204,3 @@ app.post('/submitAnswer', (req, res) => {
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running on port ${PORT}`);
-});
