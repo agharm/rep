@@ -90,9 +90,9 @@
     <div class="menu">
         <h2>Menu</h2>
         <ul>
-            <li><a href="https://agharweb-54fc277bc896.herokuapp.com/work" data-title="Work instructions, IEC 60335-1" data-content="Instructions for work according to IEC 60335-1.">IEC 60335-1</a></li>
-            <li><a href="/class" data-title="AC Energy Efficiency Class Calc." data-content="Calculate energy efficiency class for AC appliances.">AC Energy Efficiency Class Calc.</a></li>
-            <li><a href="/3" data-title="3" data-content="This is menu item 3.">3</a></li>
+            <li><a href="https://agharweb-54fc277bc896.herokuapp.com/work" data-title="Work Instructions, IEC 60335-1" data-content="Instructions for lab work according to IEC 60335-1.">IEC 60335-1</a></li>
+            <li><a href="/class" data-title="AC Energy Efficiency Class Calc." data-content="Excel sheet to calculate Energy Efficiency class for Air Conditions.">AC Energy Efficiency Class Calc.</a></li>
+            <li><a href="/no.3" data-title="" data-content="...">3</a></li>
             <!-- New menu entry -->
         </ul>
     </div>
@@ -117,7 +117,7 @@
                 const content = item.getAttribute('data-content');
 
                 // Update the title and content
-                titleElement.textContent = 'Title: ' + title;
+                titleElement.textContent = /*'Title: '+*/ title;
                 contentElement.textContent = content;
             });
         });
