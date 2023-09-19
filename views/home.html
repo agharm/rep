@@ -51,7 +51,7 @@
         /* Content container styles */
         .container {
             flex: 1; /* Grow to fill the remaining space */
-            max-width: 800px; /* Adjust the max-width as needed */
+            max-width: 600px; /* Adjust the max-width as needed */
             padding: 20px;
             background-color: #ffffff;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -61,6 +61,7 @@
         h1 {
             color: #333333;
             margin-top: 0; /* Add this line to remove the top margin */
+            margin-bottom: 10;
         }
 
         a.button {
@@ -83,10 +84,10 @@
         }
 
         .container p {
-            font-family: 'Pacifico', Arial, Helvetica, sans-serif;
+            font-family: 'Dancing Script', cursive;
             font-size: 18px; /* You can adjust the size as needed */
             font-weight: normal; /* Set to normal to remove boldness */
-            white-space: pre-line; /* Allow line breaks */
+            margin-top: 0;
         }
     </style>
 </head>
@@ -106,35 +107,54 @@
 
     <!-- Content container -->
     <div class="container">
-        <h1>Welcome</h1>
-        <p id="typed-text">
-            <!-- Text will appear here letter by letter -->
+        <h1>Welcome...</h1>
+        <p id="typed-text-1">
+            <!-- First paragraph text will appear here letter by letter -->
         </p>
-        <p>~Mohammad Masri</p>
+        <p id="typed-text-2">
+            <!-- Second paragraph text will appear here letter by letter -->
+        </p>
     </div>
 
     <script>
-        // Text to be typed letter by letter
-        const textToType = "People are put on this earth for a purpose. The ones who leave a trace of goodness, excellence, tolerance, ethical conduct and heritage in the form of an advice, a message, a book, a note, a piece of art, or any sort of human-friendly achievement or humanly raised sons and daughters are those who deserve to be remembered. It is within our ability to be part of those, and we should be. Bring harmony and resonance to your life, and you will see/hear/feel that the whole universe with all its creatures are glorifying Allah with you in a pleasant scene worth living it wholly and to its far extent.~Mohammad Masri";
+        // First paragraph of text to be typed letter by letter
+        const textToType1 = "People are put on this earth for a purpose. The ones who leave a trace of goodness, excellence, tolerance, ethical conduct and heritage in the form of an advice, a message, a book, a note, a piece of art, or any sort of human-friendly achievement or humanly raised sons and daughters are those who deserve to be remembered. It is within our ability to be part of those, and we should be. Bring harmony and resonance to your life, and you will see/hear/feel that the whole universe with all its creatures are glorifying Allah with you in a pleasant scene worth living it wholly and to its far extent.";
+
+        // Second paragraph of text to be typed letter by letter
+        const textToType2 = "~Mohammad Masri";
         
-        // Get the <p> element where text will appear
-        const typedTextElement = document.getElementById('typed-text');
+        // Get the <p> elements where text will appear
+        const typedTextElement1 = document.getElementById('typed-text-1');
+        const typedTextElement2 = document.getElementById('typed-text-2');
 
         // Initialize variables
-        let charIndex = 0;
-        let typingSpeed = 50; // Adjust typing speed (milliseconds)
+        let charIndex1 = 0;
+        let charIndex2 = 0;
+        let typingSpeed = 10; // Adjust typing speed (milliseconds)
 
-        // Function to type text letter by letter
-        function typeText() {
-            if (charIndex < textToType.length) {
-                typedTextElement.textContent += textToType.charAt(charIndex);
-                charIndex++;
-                setTimeout(typeText, typingSpeed);
+        // Function to type text letter by letter for the first paragraph
+        function typeText1() {
+            if (charIndex1 < textToType1.length) {
+                typedTextElement1.textContent += textToType1.charAt(charIndex1);
+                charIndex1++;
+                setTimeout(typeText1, typingSpeed);
+            } else {
+                // When the first paragraph is finished, start typing the second paragraph
+                typeText2();
+            }
+        }
+
+        // Function to type text letter by letter for the second paragraph
+        function typeText2() {
+            if (charIndex2 < textToType2.length) {
+                typedTextElement2.textContent += textToType2.charAt(charIndex2);
+                charIndex2++;
+                setTimeout(typeText2, typingSpeed);
             }
         }
 
         // Start typing when the page loads
-        window.onload = typeText;
+        window.onload = typeText1;
     </script>
 </body>
 </html>
