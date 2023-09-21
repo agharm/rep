@@ -27,7 +27,7 @@ app.use((err, req, res, next) => {
 
 // Separate concerns into different modules or functions
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/views/index.html');
+  res.sendFile(__dirname + 'index.html');
 });
 
 app.get('/question-form', (req, res) => {
