@@ -39,13 +39,13 @@ app.get('/response', (req, res) => {
 });
 
 app.get('/ted-talks', (req, res) => {
-  res.sendFile(__dirname + '/views/ted.html');
+  res.sendFile(__dirname + '/views/ted2.html');
 });
 
 // Serve the Certificates page
 app.get('/certificates', (req, res) => {
   // Set the path to your certificate.html file
-  const certificatesPagePath = path.join(__dirname, 'views', 'cert.html');
+  const certificatesPagePath = path.join(__dirname, 'views', 'cert2.html');
 
   // Send the certificate.html file as a response
   res.sendFile(certificatesPagePath);
